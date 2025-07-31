@@ -5,19 +5,18 @@ import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 const Input = (props: InputProps) => {
+    const { icon, containerStyle, inputStyle, inputRef, ...textInputProps } =
+        props;
+
     return (
-        <View
-            style={[
-                styles.container,
-                props.containerStyle && props.containerStyle,
-            ]}
-        >
-            {props.icon && props.icon}
+        <View style={[styles.container, containerStyle && containerStyle]}>
+            {icon && icon}
 
             <TextInput
-                style={[styles.input, props.inputStyle]}
+                {...textInputProps}
+                style={[styles.input, inputStyle]}
                 placeholderTextColor={colors.neutral400}
-                ref={props.inputRef && props.inputRef}
+                ref={inputRef}
             />
         </View>
     );
