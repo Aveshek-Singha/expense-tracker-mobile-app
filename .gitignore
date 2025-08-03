@@ -31,7 +31,11 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
+
+# constants with sensitive data
+constants/
 
 # typescript
 *.tsbuildinfo
