@@ -18,14 +18,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const router = useRouter();
 
     useEffect(() => {
-        const unsub = onAuthStateChanged(auth, (firebaseUser) => {
+        const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
-                setUser({
-                    uid: firebaseUser?.uid,
-                    email: firebaseUser?.email,
-                    name: firebaseUser?.displayName,
-                });
-                updateUserData(firebaseUser.uid);
+                // Don't set user state immediately, wait for Firestore data
+                await updateUserData(firebaseUser.uid);
                 router.replace("/(tabs)");
             } else {
                 setUser(null);
@@ -57,11 +53,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
                 email,
                 password
             );
+
+            // Create user document in Firestore
             await setDoc(doc(firestore, "users", response?.user?.uid), {
                 name,
                 email,
                 uid: response?.user?.uid,
             });
+
+            // Update local user state immediately with the correct data
+            setUser({
+                uid: response?.user?.uid,
+                email: response?.user?.email,
+                name: name,
+                image: null,
+            });
+
             return { success: true };
         } catch (error: any) {
             let msg = error.message;
@@ -87,9 +94,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
                     image: data.image || null,
                 };
                 setUser({ ...userData });
+            } else {
+                // If document doesn't exist, use Firebase Auth data as fallback
+                const currentUser = auth.currentUser;
+                if (currentUser) {
+                    setUser({
+                        uid: currentUser.uid,
+                        email: currentUser.email,
+                        name: currentUser.displayName,
+                        image: null,
+                    });
+                }
+                console.log(
+                    "User document not found in Firestore, using auth data"
+                );
             }
         } catch (error: any) {
-            //let msg = error.message;
             console.log("error: ", error);
         }
     };
