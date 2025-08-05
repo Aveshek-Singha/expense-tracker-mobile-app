@@ -6,7 +6,7 @@ import { colors } from "@/constants/theme";
 import { useAuth } from "@/contexts/authContexts";
 import { signOut } from "firebase/auth";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 const Home = () => {
     const { user } = useAuth();
@@ -18,10 +18,12 @@ const Home = () => {
 
     return (
         <ScreenWrapper>
-            <Typo>Home</Typo>
-            <Button onPress={handleLogout}>
-                <Typo color={colors.black}>Logout</Typo>
-            </Button>
+            <View>
+                <Typo>Home</Typo>
+                <Button onPress={handleLogout}>
+                    <Typo color={colors.black}>Logout</Typo>
+                </Button>
+            </View>
         </ScreenWrapper>
     );
 };
