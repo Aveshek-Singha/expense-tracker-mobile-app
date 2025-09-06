@@ -11,7 +11,6 @@ import React from "react";
 import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useAuth } from "../../contexts/authContexts";
-
 import { auth } from "@/config/firebase";
 import { useRouter } from "expo-router";
 import { signOut } from "firebase/auth";
