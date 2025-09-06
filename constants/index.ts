@@ -1,5 +1,5 @@
-export const CLOUDINARY_CLOUD_NAME = "";
-export const CLOUDINARY_UPLOAD_PRESET = "";
+export const CLOUDINARY_CLOUD_NAME = "dtiag78sj";
+export const CLOUDINARY_UPLOAD_PRESET = "images";
 
 // Firebase Configuration
 export const FIREBASE_API_KEY = "AIzaSyBqiwMn6QrhIpfbw-47YuKkuiCeTHbMXDQ";
