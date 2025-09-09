@@ -99,15 +99,15 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     deleteIcon: {
-        position: "absolute",
-        top: scale(6),
-        right: scale(6),
-        shadowColor: colors.black,
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 10,
+      position: "absolute",
+      top: scale(6),
+      right: scale(6),
+      shadowColor: colors.black,
+      shadowOffset: {
+        width: 0,
+        height: 5
+      },
+      shadowOpacity: 1,
+      shadowRadius: 10,
     },
 });
