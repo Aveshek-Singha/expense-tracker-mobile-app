@@ -16,19 +16,18 @@ import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 const Home = () => {
     const { user } = useAuth();
     const router = useRouter();
-  
+
     const constraints = [
-      where("uid", "==", user?.uid),
-      orderBy("date", "desc"),
-      limit(30),
+        where("uid", "==", user?.uid),
+        orderBy("date", "desc"),
+        limit(30),
     ];
-  
+
     const {
-      data: recentTransactions,
-      error,
-      loading: transactionsLoading,
+        data: recentTransactions,
+        error,
+        loading: transactionsLoading,
     } = useFetchData<TransactionType>("transactions", constraints);
-  
 
     return (
         <ScreenWrapper>
@@ -43,7 +42,12 @@ const Home = () => {
                             {user?.name}
                         </Typo>
                     </View>
-                    <TouchableOpacity style={styles.searchIcon}>
+                    <TouchableOpacity
+                        onPress={() =>
+                            router.push("/(modals)/searchModal" as any)
+                        }
+                        style={styles.searchIcon}
+                    >
                         <Icons.MagnifyingGlass
                             size={verticalScale(22)}
                             color={colors.neutral200}

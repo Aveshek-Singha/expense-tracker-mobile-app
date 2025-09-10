@@ -41,5 +41,3 @@ constants/
 *.tsbuildinfo
 
 app-example
-
-.kiro/

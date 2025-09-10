@@ -9,10 +9,7 @@ import { expenseCategories, transactionTypes } from "@/constants/data";
 import { colors, radius, spacingX, spacingY } from "@/constants/theme";
 import { useAuth } from "@/contexts/authContexts";
 import useFetchData from "@/hooks/useFetchData";
-import {
-    createOrUpdateTransaction,
-    deleteTransaction,
-} from "@/services/transactionService";
+import { createOrUpdateTransaction, deleteTransaction } from "@/services/transactionService";
 import { TransactionType, WalletType } from "@/types";
 import { scale, verticalScale } from "@/utils/styling";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -94,12 +91,7 @@ const TransactionModal = () => {
         const { type, amount, description, category, date, walletId, image } =
             transaction;
 
-        if (
-            !walletId ||
-            !date ||
-            !amount ||
-            (type === "expense" && !category)
-        ) {
+        if (!walletId || !date || !amount || (type === "expense" && !category)) {
             Alert.alert("Transaction", "Please fill all the fields");
             return;
         }
@@ -134,10 +126,7 @@ const TransactionModal = () => {
     const onDelete = async () => {
         if (!oldTransaction?.id) return;
         setLoading(true);
-        const res = await deleteTransaction(
-            oldTransaction?.id,
-            oldTransaction.walletId
-        );
+        const res = await deleteTransaction(oldTransaction?.id, oldTransaction?.walletId);
         setLoading(false);
         if (res.success) {
             router.back();
